@@ -3,12 +3,13 @@ using HarmonyLib;
 namespace AdamTraveller.Patches
 {
 
-    [HarmonyPatch(typeof(TVScript))]
-    public class ExampleTVPatch
+    [HarmonyPatch(typeof(EntranceTeleport))]
+    public class TeleportPlayerPatch
     {
-        [HarmonyPatch("SwitchTVLocalClient")]
+
+        [HarmonyPatch("TeleportPlayer")]
         [HarmonyPrefix]
-        private static void SwitchTVPrefix(TVScript __instance)
+        private static void TeleportPlayerPrefix(EntranceTeleport __instance)
         {
             /*
              *  When the method is called, the TV will be turning off when we want to
@@ -17,7 +18,10 @@ namespace AdamTraveller.Patches
              *  So, we want to set the lights to what the tv's state was
              *  when this method is called.
              */
-            StartOfRound.Instance.shipRoomLights.SetShipLightsBoolean(__instance.tvOn);
+            if (__instance.FindExitPoint())
+            {
+                HUDManager.Instance.UIAudio.PlayOneShot(AdamTraveller.BiomeAudioClip);
+            }
         }
     }
 }
