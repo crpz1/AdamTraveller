@@ -1,0 +1,9 @@
+{
+    "name": "AdamTraveller",
+    "version_number": "1.0.1",
+    "website_url": "https://github.com/crpz1/AdamTraveller",
+    "description": "the funny woah a new biome, i guess im something of a dimension hopper now minecraft mod",
+    "dependencies": [
+        "BepInEx-BepInExPack-5.4.2100"
+    ]
+}
